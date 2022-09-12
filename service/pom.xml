@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>multimodule-maven</artifactId>
+        <groupId>com.dmdev</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>service</artifactId>
+
+    <properties>
+<!--        <maven.compiler.source>18</maven.compiler.source>                                                       -->
+<!--        <maven.compiler.target>18</maven.compiler.target>                                                        -->
+<!--        почему-то выдаёт ошибку при запуске через врапер,                                                       -->
+<!--        но обычный мэйвен не ошибается:                                                                         -->
+<!--        Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile)  -->
+<!--        on project service: Fatal error compiling: error: invalid target release: 18                            -->
+<!--        почему врапер не справляется с 18 джавой?                                                               -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.dmdev</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+</project>
