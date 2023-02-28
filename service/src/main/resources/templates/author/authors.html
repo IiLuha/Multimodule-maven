@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>authors</title>
+    </head>
+    <body>
+    <div th:insert="~{fragment :: header}"></div>
+        <form action="/authors" th:object="${filter}">
+            <label for="firstname"><span th:text="#{userDetails.firstname}">Firstname:</span>
+                <input id="firstname" type="text" name="firstname" th:value="*{firstname()}">
+            </label>
+            <label for="lastname"><span th:text="#{userDetails.lastname}">Lastname:</span>
+                <input id="lastname" type="text" name="lastname" th:value="*{lastname()}">
+            </label>
+            <label for="patronymic"><span th:text="#{userDetails.patronymic}">Patronymic:</span>
+                <input id="patronymic" type="text" name="patronymic" th:value="*{patronymic()}">
+            </label><br>
+            <label for="birthday"><span th:text="#{author.birthday}">Birthday of author:</span>
+                <input id="birthday" type="date" name="birthday" th:value="*{birthday()}">
+            </label>
+            <label for="minBirthday"><span th:text="#{author.minBirthday}">Minimum of author birthday:</span>
+                <input id="minBirthday" type="date" name="minBirthday" th:value="*{minBirthday()}">
+            </label>
+            <label for="maxBirthday"><span th:text="#{author.maxBirthday}">Maximum of author birthday:</span>
+                <input id="maxBirthday" type="date" name="maxBirthday" th:value="*{maxBirthday()}">
+            </label><br>
+            <div>
+                <label for="page"><span th:text="#{page}">Page:</span>
+                    <input id="page" type="number" name="page" th:value="${authors.metadata.page}">
+                </label>
+                <label for="size"><span th:text="#{size}">Size:</span>
+                    <input id="size" type="number" name="size" th:value="${authors.metadata.size}">
+                </label>
+            </div>
+            <button type="submit"><span th:text="#{filter}">Filter</span></button>
+        </form>
+        <form action="/authors/new">
+            <button type="submit"><span th:text="#{add.author}">Add author</span></button>
+        </form><br>
+    <a href="/authors"><span th:text="#{author.authors}">Authors</span></a><br>
+    <a href="/books"><span th:text="#{book.books}">Books</span></a><br>
+    <a href="/users"><span th:text="#{user.users}">Users</span></a><br>
+    <a href="/orders"><span th:text="#{order.orders}">Orders</span></a><br>
+        <div th:each="author : ${authors.getContent()}" th:object="${author}">
+            <a th:href="@{'/authors/' + *{id}}" th:text="|*{lastname} *{firstname} *{patronymic} *{birthday}|">Authors</a>
+        </div>
+    </body>
+</html>

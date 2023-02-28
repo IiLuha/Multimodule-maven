@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <meta charset="UTF-8">
+      <title>userDetails</title>
+  </head>
+  <body>
+    <form th:action="@{/userDetails/create}" method="post" >
+      <input id="userId" type="hidden" name="userId" th:value="${userId}" readonly>
+      <label for="firstname"><span th:text="#{userDetails.firstname}">Firstname:</span>
+        <input id="firstname" type="text" name="firstname" value="Firstname" required>
+      </label><br>
+      <label for="lastname"><span th:text="#{userDetails.lastname}">Lastname:</span>
+        <input id="lastname" type="text" name="lastname" value="Lastname" required>
+      </label><br>
+      <label for="patronymic"><span th:text="#{userDetails.patronymic}">Patronymic:</span>
+        <input id="patronymic" type="text" name="patronymic" value="Patronymic">
+      </label><br>
+      <label for="phone"><span th:text="#{userDetails.phone}">Phone:</span>
+        <input id="phone" type="text" name="phone" value="Phone">
+      </label><br>
+      <button type="submit"><span th:text="#{create}">Create</span></button>
+    </form>
+  </body>
+</html>

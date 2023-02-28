@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+  <head>
+      <meta charset="UTF-8">
+      <title>userAddress</title>
+  </head>
+  <body>
+    <form th:action="@{/userAddress/{userId}/update(userId=${userAddress.userId})}" method="post"  th:object="${userAddress}">
+      <label for="region"><span th:text="#{userAddress.region}">Region:</span>
+        <input id="region" type="text" name="region" th:value="*{region}">
+      </label><br>
+      <label for="district"><span th:text="#{userAddress.district}">District:</span>
+        <input id="district" type="text" name="district" th:value="*{district}">
+      </label><br>
+      <label for="populationCenter"><span th:text="#{userAddress.populationCenter}">PopulationCenter:</span>
+        <input id="populationCenter" type="text" name="populationCenter" th:value="*{populationCenter}">
+      </label><br>
+      <label for="street"><span th:text="#{userAddress.street}">Street:</span>
+        <input id="street" type="text" name="street" th:value="*{street}">
+      </label><br>
+      <label for="house"><span th:text="#{userAddress.house}">House:</span>
+        <input id="house" type="text" name="house" th:value="*{house}">
+      </label><br>
+      <label for="isPrivate"><span th:text="#{userAddress.isPrivate}">My house is</span>
+        <select name="isPrivate" id="isPrivate">
+          <option th:value="true" th:selected="${userAddress.isPrivate}" th:text="'private'">
+          <option th:value="false" th:selected="not ${userAddress.isPrivate}" th:text="'an apartment building'">
+        </select>
+      </label><br>
+      <label for="frontDoor"><span th:text="#{userAddress.frontDoor}">FrontDoor:</span>
+        <input id="frontDoor" type="number" name="phone" th:value="*{frontDoor}" th:unless="*{isPrivate}">
+      </label><br>
+      <label for="floor"><span th:text="#{userAddress.floor}">Floor:</span>
+        <input id="floor" name="phone" th:value="*{floor}">
+      </label><br>
+      <label for="flat"><span th:text="#{userAddress.flat}">Flat:</span>
+        <input id="flat" th:type="*{isPrivate} ? 'hidden' : 'number'" name="flat" th:value="*{flat}">
+      </label><br>
+      <button type="submit"><span th:text="#{update}">Update</span></button>
+    </form>
+    <form th:action="@{/userAddress/{userId}/delete(userId=${userAddress.userId})}" method="post">
+      <button type="submit"><span th:text="#{delete}">Delete</span></button>
+    </form><br>
+    <a th:href="@{/users/{userId}(userId=${userAddress.userId})}"><span th:text="#{user.profile}">User profile</span></a><br>
+  </body>
+</html>
+

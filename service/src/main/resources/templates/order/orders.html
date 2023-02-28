@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>orders</title>
+    </head>
+    <body>
+    <div th:insert="~{fragment :: header}"></div>
+        <form action="/orders" th:object="${filter}">
+            <input type="hidden" name="clientId" th:value="*{clientId}">
+            <label for="afterCreatedAt" ><span th:text="#{order.lowCDate}">The lower limit of the creation date:</span>
+                <input id="afterCreatedAt"  type="datetime-local" name="afterCreatedAt" th:value="*{afterCreatedAt}">
+            </label><br>
+            <label for="beforeCreatedAt"><span th:text="#{order.upCDate}">The upper limit of the creation date:</span>
+                <input id="beforeCreatedAt" type="datetime-local" name="beforeCreatedAt" th:value="*{beforeCreatedAt}">
+            </label><br>
+            <label for="afterEndAt"><span th:text="#{order.lowEDate}">The lower limit of the closing date:</span>
+                <input id="afterEndAt" type="datetime-local" name="afterEndAt" th:value="*{afterEndAt}">
+            </label><br>
+            <label for="beforeEndAt"><span th:text="#{order.upEDate}">The upper limit of the closing date:</span>
+                <input id="beforeEndAt" type="datetime-local" name="beforeEndAt" th:value="*{beforeEndAt}">
+            </label><br>
+            <fieldset>
+                <label><span th:text="#{order.statuses}">Statuses:</span>
+                    <input type="checkbox" th:each="status : ${statuses}" name="statuses" th:value="${status}" th:text="${status.name() + ' '}">
+                </label>
+            </fieldset>
+            <label for="minPrice"><span th:text="#{order.minPrice}">Minimum of price:</span>
+                <input id="minPrice" type="number" name="minPrice" th:value="*{minPrice()}" min="0" value="0" step=".01">
+            </label>
+            <label for="maxPrice"><span th:text="#{order.maxPrice}">Maximum of price:</span>
+                <input id="maxPrice" type="number" name="maxPrice" th:value="*{maxPrice()}" min="0" value="10000" step=".01">
+            </label><br>
+            <fieldset th:if="*{clientId == null}"><span th:text="#{user}">User:</span><br>
+                <label for="email"><span th:text="#{login.email}">Email:</span>
+                    <input id="email" type="text" name="email" th:value="${filter.email()}">
+                </label>
+                <div th:each="role : ${roles}"><span th:text="#{role}">Role</span>
+                    <input th:id="${role}" type="radio" name="role" th:value="${role}" th:checked="${role == filter.role()}">
+                    <label th:for="${role}" th:text="${role}">Role name</label>
+                </div>
+                <input id="ALL" type="radio" name="role" value="" th:checked="${null == filter.role()}">
+                <label for="ALL" th:text="ALL">Role name</label><br>
+                <label for="firstname"><span th:text="#{userDetails.firstname}">Firstname:</span>
+                    <input id="firstname" type="text" name="firstname" th:value="${filter.firstname()}">
+                </label>
+                <label for="lastname"><span th:text="#{userDetails.lastname}">Lastname:</span>
+                    <input id="lastname" type="text" name="lastname" th:value="${filter.lastname()}">
+                </label>
+                <label for="patronymic"><span th:text="#{userDetails.patronymic}">Patronymic:</span>
+                    <input id="patronymic" type="text" name="patronymic" th:value="${filter.patronymic()}">
+                </label>
+                <label for="phone"><span th:text="#{userDetails.phone}">Phone:</span>
+                    <input id="phone" type="text" name="phone" th:value="${filter.phone()}">
+                </label>
+            </fieldset>
+            <label for="name"><span th:text="#{book.name}">Name:</span>
+                <input id="name" type="text" name="name" th:value="*{name}">
+            </label><br>
+            <label for="description"><span th:text="#{book.description}">Description:</span>
+                <input id="description" type="text" name="description" th:value="*{description}">
+            </label><br>
+            <label for="quantity"><span th:text="#{book.quantity}">Quantity:</span>
+                <input id="quantity" type="number" name="quantity" th:value="*{quantity}" min="0">
+            </label><br>
+            <label for="issueYear"><span th:text="#{book.issueYear}">Issue year:</span>
+                <input id="issueYear" type="number" name="issueYear" th:value="*{issueYear}" min="0" max="2023">
+            </label>
+            <label for="minIssueYear"><span th:text="#{book.minIssueYear}">Minimum of issue year:</span>
+                <input id="minIssueYear" type="number" name="minIssueYear" th:value="*{minIssueYear()}" min="0" max="2023">
+            </label>
+            <label for="maxIssueYear"><span th:text="#{book.maxIssueYear}">Maximum of issue year:</span>
+                <input id="maxIssueYear" type="number" name="maxIssueYear" th:value="*{maxIssueYear()}" min="0" max="2023">
+            </label><br>
+            <label for="firstnameOfAuthor"><span th:text="#{author.firstname}">Firstname of author:</span>
+                <input id="firstnameOfAuthor" type="text" name="firstnameOfAuthor" th:value="*{firstnameOfAuthor}">
+            </label><br>
+            <label for="lastnameOfAuthor"><span th:text="#{author.lastname}">Lastname of author:</span>
+                <input id="lastnameOfAuthor" type="text" name="lastnameOfAuthor" th:value="*{lastnameOfAuthor}">
+            </label><br>
+            <label for="patronymicOfAuthor"><span th:text="#{author.patronymic}">Patronymic of author:</span>
+                <input id="patronymicOfAuthor" type="text" name="patronymicOfAuthor" th:value="*{patronymicOfAuthor}">
+            </label><br>
+            <label for="birthday"><span th:text="#{author.birthday}">Birthday of author:</span>
+                <input id="birthday" type="date" name="birthday" th:value="*{birthday}">
+            </label>
+            <label for="minBirthday"><span th:text="#{author.minBirthday}">Minimum of author birthday:</span>
+                <input id="minBirthday" type="date" name="minBirthday" th:value="*{minBirthday()}">
+            </label>
+            <label for="maxBirthday"><span th:text="#{author.maxBirthday}">Maximum of author birthday:</span>
+                <input id="maxBirthday" type="date" name="maxBirthday" th:value="*{maxBirthday()}">
+            </label><br>
+            <div>
+                <label for="page"><span th:text="#{page}">Page:</span>
+                    <input id="page" type="number" name="page" th:value="${orders.metadata.page}">
+                </label>
+                <label for="size"><span th:text="#{size}">Size:</span>
+                    <input id="size" type="number" name="size" th:value="${orders.metadata.size}">
+                </label>
+            </div>
+            <button type="submit"><span th:text="#{filter}">Filter</span></button>
+        </form>
+    <a href="/authors"><span th:text="#{author.authors}">Authors</span></a><br>
+    <a href="/books"><span th:text="#{book.books}">Books</span></a><br>
+    <a href="/users"><span th:text="#{user.users}">Users</span></a><br>
+    <a href="/orders"><span th:text="#{order.orders}">Orders</span></a><br>
+        <div th:each="order : ${orders.getContent()}" th:object="${order}">
+            <a th:href="@{'/orders/' + *{id}}" th:text="|#{order}: #{order.clientId}: *{clientId} #{order.createdAt} *{createdAt} #{order.closedAt} *{endAt} #{order.price}: *{price} #{order.status}: *{status}|"></a>
+        </div><br>
+    </body>
+</html>

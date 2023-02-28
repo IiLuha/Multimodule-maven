@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>order</title>
+    </head>
+    <body>
+        <form action="/orders/addOrderProduct" method="post">
+            <input type="hidden" name="bookId" th:value="${bookId}">
+            <input type="hidden" name="orderId" th:value="${clientId}">
+            <label for="quantity"><span th:text="#{book.quantity}">Quantity:</span>
+                <input id="quantity"  type="number" name="quantity" required min="1" th:max="${bookQuantity}">
+            </label><br>
+            <input type="hidden" name="bookPrice" th:value="${bookPrice}">
+            <button type="submit"><span th:text="#{add}">Add</span></button>
+        </form>
+        <a href="/authors"><span th:text="#{author.authors}">Authors</span></a><br>
+        <a href="/books"><span th:text="#{book.books}">Books</span></a><br>
+        <a href="/users"><span th:text="#{user.users}">Users</span></a><br>
+        <a href="/orders"><span th:text="#{order.orders}">Orders</span></a><br>
+    </body>
+</html>

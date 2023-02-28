@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>order</title>
+    </head>
+    <body>
+    <div th:insert="~{fragment :: header}"></div>
+        <form th:action="@{/orders/{orderId}/update(orderId=${order.id})}" method="post"  th:object="${order}">
+            <label for="createdAt"><span th:text="#{order.createdAt}">Created at:</span>
+                <b th:text="*{createdAt}" id="createdAt"></b>
+                <input id="createdAtInp"  type="hidden" name="createdAt" th:value="*{createdAt}">
+            </label><br>
+            <label for="endAt"><span th:text="#{order.closedAt}">End at:</span>
+                <b th:text="*{endAt}" id="endAt"></b>
+                <input id="endAtInp"  type="hidden" name="endAt" th:value="*{endAt}">
+            </label><br>
+            <label for="status"><span th:text="#{order.status}">Status:</span>
+                <select id="status" name="status">
+                    <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}" th:selected="${order.status eq status}"></option>
+                </select><br>
+            </label>
+            <label for="orderPrice"><span th:text="#{order.price}">Price:</span>
+                <input id="orderPrice" type="number" name="price" th:value="*{price}" required min="0"  step=".01">
+            </label><br>
+            <label for="clientId"><span th:text="#{order.clientId}">Id:</span>
+                <b th:text="${client.id}" id="clientId"></b>
+                <input id="clientIdInp"  type="hidden" name="clientId" th:value="*{clientId}">
+            </label>
+            <a th:if="${client.userDetails != null}" th:object="${client}" th:href="@{'/users/' + *{id}}" th:text="|#{user}: *{userDetails.getLastname()} *{userDetails.getFirstname()} *{userDetails.getPatronymic()} *{userDetails.getPhone()}|"></a><br>
+            <button type="submit"><span th:text="#{update}">Update</span></button>
+        </form>
+        <form th:action="@{/orders/{orderId}/delete(orderId=${order.id})}" method="post">
+            <button type="submit"><span th:text="#{delete}">Delete</span></button>
+        </form>
+        <form th:action="@{/orderProducts/{orderId}/findBook(orderId=${order.id})}" method="post">
+            <button type="submit"><span th:text="#{add.product}">Add Product</span></button>
+        </form><br>
+        <div th:each="product : ${order.getOrderProducts()}" th:object="${product}">
+            <a th:href="@{'/orderProducts/' + *{id}}" th:text="|#{product}:|"></a><br>
+            <div th:object="${product.book}"><span th:text="#{book}">Book:</span>
+                <a th:href="@{'/books/' + *{id}}" th:text="|*{name} #{order.price}: *{price} #{book.issueYear}: *{issueYear}|"></a><br>
+                <div th:each="author : ${product.book.getAuthors()}" th:object="${author}">
+                    <a th:href="@{'/authors/' + *{id}}" th:text="|*{lastname} *{firstname} *{patronymic} #{author.birthday}: *{birthday}|"></a><br>
+                </div>
+            </div>
+            <form th:action="@{/orderProducts/{orderProductId}/update(orderProductId=*{id})}" method="post">
+                <input name="orderId" type="hidden" th:value="*{orderId}">
+                <input name="bookId" type="hidden" th:value="*{book.id}">
+                <label for="quantity"><span th:text="#{book.quantity}">Quantity:</span>
+                    <input id="quantity" name="quantity" type="number" th:value="*{quantity}" min="1">
+                </label>
+                <input name="totalPrice" type="hidden" th:value="*{totalPrice}">
+                <button type="submit"><span th:text="#{product.update}">Update product</span></button>
+            </form>
+            <label for="totalPrice"><span th:text="#{product.totalPrice}">Total price:</span>
+                <b id="totalPrice" th:text="*{totalPrice}"></b>
+            </label>
+            <form th:action="@{/orderProducts/{orderProductId}/delete(orderProductId=*{id})}" method="post">
+                <input type="hidden" name="clientId" th:value="${order.id}">
+                <button type="submit"><span th:text="#{delete}">Delete</span></button>
+            </form><br>
+        </div><br>
+        <a href="/authors"><span th:text="#{author.authors}">Authors</span></a><br>
+        <a href="/books"><span th:text="#{book.books}">Books</span></a><br>
+        <a href="/users"><span th:text="#{user.users}">Users</span></a><br>
+        <a href="/orders"><span th:text="#{order.orders}">Orders</span></a><br>
+    </body>
+</html>

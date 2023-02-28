@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Hello world Example</title>
+</head>
+    <body>
+        <h1>Hello <span th:text="${name}">Dummy text</span>, you can login/register</h1>
+        <br>
+        <form action="/users/login">
+            <button type="submit">Login</button>
+        </form>
+        <form action="/users/registration">
+            <button type="submit">Registration</button>
+        </form>
+    </body>
+</html>

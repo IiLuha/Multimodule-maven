@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>book</title>
+    </head>
+    <body>
+        <div th:insert="~{fragment :: header}"></div>
+        <form th:action="@{/books/{bookId}/update(bookId=${book.id})}" enctype="multipart/form-data" method="post"  th:object="${book}">
+            <div th:if="${book.imagePath}">
+                <img th:src="@{/api/v1/books/{bookId}/image(bookId=${book.id})}" alt="User image">
+            </div>
+            <label for="name"><span th:text="#{book.name}">Name:</span>
+                <input id="name" type="text" name="name" th:value="*{name}" required>
+            </label><br>
+            <label for="description"><span th:text="#{book.description}">Description:</span>
+                <input id="description" type="text" name="description" th:value="*{description}">
+            </label><br>
+            <label for="image"><span th:text="#{image}">Image:</span>
+                <input id="image" type="file" name="image">
+            </label><br>
+            <label for="price"><span th:text="#{order.price}">Price:</span>
+                <input id="price" type="number" name="price" th:value="*{price}" required min="0" step=".01">
+            </label><br>
+            <label for="quantity"><span th:text="#{book.quantity}">Quantity:</span>
+                <input id="quantity" type="number" name="quantity" th:value="*{quantity}" required>
+            </label><br>
+            <label for="issueYear"><span th:text="#{book.issueYear}">Issue year:</span>
+                <input id="issueYear" type="number" name="issueYear" th:value="*{issueYear}" required min="0" max="2023">
+            </label><br>
+            <div th:each="author : ${book.getAuthors()}" th:object="${author}">
+                <label for="lastname">
+                    <b th:text="*{lastname}" id="lastname"></b>
+                </label>
+                <label for="firstname">
+                    <b th:text="*{firstname}" id="firstname">tte</b>
+                </label>
+                <label for="patronymic">
+                    <b th:text="*{patronymic}" id="patronymic"></b>
+                </label>
+                <label for="birthday">
+                    <b th:text="*{birthday}" id="birthday"></b>
+                </label><br>
+                <a id="author" th:href="@{/authors/{id}(id=*{id})}"><span th:text="#{author}">Author</span></a><br>
+            </div><br>
+            <button type="submit"><span th:text="#{update}">Update</span></button>
+        </form>
+        <form th:action="@{/books/{bookId}/findAuthor(bookId=${book.id})}" method="post">
+            <button type="submit"><span th:text="#{add.author}">Add author</span></button>
+        </form>
+        <form th:action="@{/books/{bookId}/delete(bookId=${book.id})}" method="post">
+            <button type="submit"><span th:text="#{delete}">Delete</span></button>
+        </form>
+        <a href="/authors"><span th:text="#{author.authors}">Authors</span></a><br>
+        <a href="/books"><span th:text="#{book.books}">Books</span></a><br>
+        <a href="/users"><span th:text="#{user.users}">Users</span></a><br>
+        <a href="/orders"><span th:text="#{order.orders}">Orders</span></a><br>
+    </body>
+</html>

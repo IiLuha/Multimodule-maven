@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <meta charset="UTF-8">
+      <title>book</title>
+  </head>
+  <body>
+    <div th:insert="~{fragment :: header}"></div>
+    <form th:action="@{/books/{id}/addAuthor(id=${id})}" method="post"  th:object="${filter}">
+      <label for="firstname"><span th:text="#{userDetails.firstname}">Firstname:</span>
+        <input id="firstname" type="text" name="firstname" th:value="${filter.firstname()}">
+      </label><br>
+      <label for="lastname"><span th:text="#{userDetails.lastname}">Lastname:</span>
+        <input id="lastname" type="text" name="lastname" th:value="${filter.lastname()}">
+      </label><br>
+      <label for="patronymic"><span th:text="#{userDetails.patronymic}">Patronymic:</span>
+        <input id="patronymic" type="text" name="patronymic" th:value="${filter.patronymic()}">
+      </label><br>
+      <label for="birthday"><span th:text="#{author.birthday}">Birthday of author:</span>
+        <input id="birthday" type="date" name="birthday" th:value="${filter.birthday()}">
+      </label><br>
+      <button type="submit"><span th:text="#{add}">Add</span></button>
+    </form>
+    <a href="/authors"><span th:text="#{author.authors}">Authors</span></a><br>
+    <a href="/books"><span th:text="#{book.books}">Books</span></a><br>
+    <a href="/users"><span th:text="#{user.users}">Users</span></a><br>
+    <a href="/orders"><span th:text="#{order.orders}">Orders</span></a><br>
+  </body>
+</html>

@@ -1,5 +1,5 @@
 # Project exclude paths
-/common/target/
+/common-spring-boot-starter-logging/target/
 /service/target/
 /target/
 

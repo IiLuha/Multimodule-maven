@@ -3,14 +3,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>2.7.5</version>
+    </parent>
 
     <groupId>com.dmdev</groupId>
     <artifactId>multimodule-maven</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>common</module>
         <module>service</module>
+        <module>common-spring-boot-starter-logging</module>
     </modules>
 
     <name>multimodule-maven</name>
@@ -19,7 +24,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <lombok.version>1.18.24</lombok.version>
+        <postgresql.version>42.5.0</postgresql.version>
+        <junit.jupiter.version>5.9.0</junit.jupiter.version>
+        <mockito.version>4.8.0</mockito.version>
+        <testcontainers.version>1.17.4</testcontainers.version>
+        <assertj.version>3.23.1</assertj.version>
+        <openapi.version>1.6.14</openapi.version>
+        <configuration.processor.version>2.7.5</configuration.processor.version>
     </properties>
 
     <build>
@@ -36,6 +47,11 @@
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.10.1</version>
+                    <configuration>
+                        <compilerArgs>
+                            <arg>-parameters</arg>
+                        </compilerArgs>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>

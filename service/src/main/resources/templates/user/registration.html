@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>RegistrationPage</title>
+    </head>
+    <body>
+        <form th:action="@{/users/create}" method="post" enctype="multipart/form-data">
+            <label for="email"><span th:text="#{login.email}">Email:</span>
+                <input id="email" type="text" name="email" value="Email">
+            </label><br>
+            <label for="rawPassword"><span th:text="#{login.password}">Password:</span>
+                <input id="rawPassword" type="password" name="rawPassword">
+            </label><br>
+            <label for="image"><span th:text="#{image}">Image:</span>
+                <input id="image" type="file" name="image">
+            </label><br>
+            <div><span th:text="#{role}">Role</span>
+                <input th:id="role" type="hidden" name="role" th:value="${role}">
+                <label th:for="role" th:text="${role}">Role name</label>
+            </div><br>
+            <button type="submit"><span th:text="#{toRegistration}">Registration</span></button>
+        </form>
+    </body>
+</html>

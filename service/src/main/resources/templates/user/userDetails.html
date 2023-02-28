@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <meta charset="UTF-8">
+      <title>userDetails</title>
+  </head>
+  <body>
+    <form th:action="@{/userDetails/{userId}/update(userId=${userDetails.userId})}" method="post"  th:object="${userDetails}">
+      <label for="firstname"><span th:text="#{userDetails.firstname}">Firstname:</span>
+        <input id="firstname" type="text" name="firstname" th:value="*{firstname}">
+      </label><br>
+      <label for="lastname"><span th:text="#{userDetails.lastname}">Lastname:</span>
+        <input id="lastname" type="text" name="lastname" th:value="*{lastname}">
+      </label><br>
+      <label for="patronymic"><span th:text="#{userDetails.patronymic}">Patronymic:</span>
+        <input id="patronymic" type="text" name="patronymic" th:value="*{patronymic}">
+      </label><br>
+      <label for="phone"><span th:text="#{userDetails.phone}">Phone:</span>
+        <input id="phone" type="text" name="phone" th:value="*{phone}">
+      </label><br>
+      <button type="submit"><span th:text="#{update}">Update</span></button>
+    </form>
+    <form th:action="@{/userDetails/{userId}/delete(userId=${userDetails.userId})}" method="post">
+      <button type="submit"><span th:text="#{delete}">Delete</span></button>
+    </form><br>
+    <a th:href="@{/users/{userId}(userId=${userDetails.userId})}"><span th:text="#{user.profile}">User profile</span></a><br>
+  </body>
+</html>

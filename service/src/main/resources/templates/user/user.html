@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>User</title>
+    </head>
+    <body>
+    <div th:insert="~{fragment :: header}"></div>
+        <form th:action="@{/users/{userId}/update(userId=${user.id})}" enctype="multipart/form-data" method="post"  th:object="${user}">
+            <div th:if="${user.imagePath}">
+                <img th:src="@{/api/v1/users/{userId}/image(userId=${user.id})}" alt="User image">
+            </div>
+            <label for="email"><span th:text="#{login.email}">Email:</span>
+                <input id="email" type="text" name="email" th:value="*{email}">
+            </label><br>
+            <label for="rawPassword"><span th:text="#{login.password}">Password:</span>
+                <input id="rawPassword" type="password" name="rawPassword" th:value="*{password}">
+            </label><br>
+            <label for="image"><span th:text="#{image}">Image:</span>
+                <input id="image" type="file" name="image">
+            </label><br>
+            <div th:each="role : ${roles}"><span th:text="#{role}">Role</span>
+                <input th:id="${role}" type="radio" name="role" th:value="${role}" th:checked="${role == user.role}">
+                <label th:for="${role}" th:text="${role}">Role name</label>
+            </div>
+            <div th:if="${userDetails != null}">
+                <label for="firstname"><span th:text="#{userDetails.firstname}">Firstname:</span>
+                    <b th:text="${userDetails.getFirstname()}" id="firstname"></b>
+                </label><br>
+                <label for="lastname"><span th:text="#{userDetails.lastname}">Lastname:</span>
+                    <b th:text="${userDetails.getLastname()}" id="lastname"></b>
+                </label><br>
+                <label for="patronymic"><span th:text="#{userDetails.patronymic}">Patronymic:</span>
+                    <b th:text="${userDetails.getPatronymic()}" id="patronymic"></b>
+                </label><br>
+                <label for="phone"><span th:text="#{userDetails.phone}">Phone:</span>
+                    <b th:text="${userDetails.getPhone()}" id="phone"></b>
+                </label><br>
+            </div><br>
+            <a id="UpdateUserDetails" th:href="@{/userDetails/{userId}(userId=${user.id})}" th:if="${user.userDetails} != null">
+                <span th:text="#{user.updateDet}">Update user's details</span>
+            </a><br th:if="${user.userDetails} != null">
+            <a id="CreateUserDetails" th:href="@{/userDetails/{userId}(userId=${user.id})}" th:if="${user.userDetails} == null">
+                <span th:text="#{user.deleteDet}">Create user's details</span>
+            </a><br th:if="${user.userDetails} == null">
+            <a id="UpdateUserAddress" th:href="@{/userAddress/{userId}(userId=${user.id})}" th:if="${user.userAddress} != null">
+                <span th:text="#{user.updateAd}">Update user's address</span>
+            </a><br th:if="${user.userAddress} != null">
+            <a id="CreateUserAddress" th:href="@{/userAddress/{userId}(userId=${user.id})}" th:if="${user.userAddress} == null">
+                <span th:text="#{user.deleteAd}">Create user's address</span>
+            </a><br th:if="${user.userAddress} == null">
+            <button type="submit"><span th:text="#{update}">Update</span></button>
+        </form>
+        <form th:action="@{/users/{userId}/delete(userId=${user.id})}" method="post">
+            <button type="submit"><span th:text="#{delete}">Delete</span></button>
+        </form>
+        <form action="/orders/my">
+            <input type="hidden" name="clientId" th:value="${user.id}">
+            <button type="submit"><span th:text="#{user.myOrd}">My orders</span></button>
+        </form>
+        <form th:action="@{/orders/create/{clientId}(clientId=${user.id})}" method="post">
+            <button type="submit"><span th:text="#{user.createOrd}">Create order</span></button>
+        </form>
+        <a href="/authors"><span th:text="#{author.authors}">Authors</span></a><br>
+        <a href="/books"><span th:text="#{book.books}">Books</span></a><br>
+        <a href="/users"><span th:text="#{user.users}">Users</span></a><br>
+        <a href="/orders"><span th:text="#{order.orders}">Orders</span></a><br>
+    </body>
+</html>
