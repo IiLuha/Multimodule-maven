@@ -136,7 +136,7 @@
                         <configuration>
                             <targetFolder>target/generated-sources/annotations</targetFolder>
                             <packages>
-                                <package>com.dmdev.database.entity</package>
+                                <package>com.tidev.database.entity</package>
                             </packages>
                         </configuration>
                     </execution>

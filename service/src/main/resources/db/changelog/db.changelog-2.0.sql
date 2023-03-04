@@ -1,5 +1,5 @@
 --liquibase formatted sql
 
---changeset kseniaw:1
+--changeset tsurakov:1
 alter table users
 add column image Varchar(64);

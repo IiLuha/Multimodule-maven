@@ -24,8 +24,8 @@
       </label><br>
       <label for="isPrivate"><span th:text="#{userAddress.isPrivate}">My house is</span>
         <select name="isPrivate" id="isPrivate">
-          <option th:value="true" th:selected="${userAddress.isPrivate}" th:text="'private'">
-          <option th:value="false" th:selected="not ${userAddress.isPrivate}" th:text="'an apartment building'">
+          <option th:value="true" selected th:text="'private'">
+          <option th:value="false" th:text="'an apartment building'">
         </select>
       </label><br>
       <label for="frontDoor"><span th:text="#{userAddress.frontDoor}">FrontDoor:</span>

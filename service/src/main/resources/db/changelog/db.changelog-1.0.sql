@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset kseniaw:1
+--changeset tsurakov:1
 CREATE TABLE author
 (
     id         SERIAL PRIMARY KEY,
@@ -11,7 +11,7 @@ CREATE TABLE author
     UNIQUE (firstname, lastname, patronymic, birthday)
 );
 
---changeset kseniaw:2
+--changeset tsurakov:2
 CREATE TABLE book
 (
     id          BIGSERIAL PRIMARY KEY,
@@ -22,7 +22,7 @@ CREATE TABLE book
     issue_year  SMALLINT     NOT NULL
 );
 
---changeset kseniaw:3
+--changeset tsurakov:3
 CREATE TABLE book_author
 (
     author_id INT    NOT NULL REFERENCES author (id) ON DELETE CASCADE,
@@ -30,7 +30,7 @@ CREATE TABLE book_author
     PRIMARY KEY (book_id, author_id)
 );
 
---changeset kseniaw:4
+--changeset tsurakov:4
 CREATE TABLE users
 (
     id       SERIAL PRIMARY KEY,
@@ -39,7 +39,7 @@ CREATE TABLE users
     role     VARCHAR(32)  NOT NULL
 );
 
---changeset kseniaw:5
+--changeset tsurakov:5
 CREATE TABLE user_details
 (
     id         SERIAL PRIMARY KEY,
@@ -50,7 +50,7 @@ CREATE TABLE user_details
     phone      VARCHAR(32)
 );
 
---changeset kseniaw:6
+--changeset tsurakov:6
 CREATE TABLE user_address
 (
     user_id           INT PRIMARY KEY REFERENCES users (id),
@@ -65,7 +65,7 @@ CREATE TABLE user_address
     flat              INT
 );
 
---changeset kseniaw:7
+--changeset tsurakov:7
 CREATE TABLE orders
 (
     id         BIGSERIAL PRIMARY KEY,
@@ -76,7 +76,7 @@ CREATE TABLE orders
     client_id  INT              NOT NULL REFERENCES users (id) ON DELETE CASCADE
 );
 
---changeset kseniaw:8
+--changeset tsurakov:8
 CREATE TABLE order_product
 (
     id          BIGSERIAL PRIMARY KEY,
