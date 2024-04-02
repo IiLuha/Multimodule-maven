@@ -4,7 +4,7 @@ import com.itdev.database.dao.repositories.UserAddressRepository;
 import com.itdev.database.dao.repositories.UserRepository;
 import com.itdev.database.entity.User;
 import com.itdev.database.entity.UserAddress;
-import com.itdev.util.HibernateTestUtil;
+import com.itdev.util.HibernateITUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +32,9 @@ class UserAddressIT extends IntegrationTestBase {
 
     @BeforeEach
     void prepareUserAddressTable() {
-        user = HibernateTestUtil.createUserToReadUpdateDelete();
+        user = HibernateITUtil.createUserToReadUpdateDelete();
         session.persist(user);
-        rudUserAddress = HibernateTestUtil.createUserAddress();
+        rudUserAddress = HibernateITUtil.createUserAddress();
         user.addUserAddress(rudUserAddress);
         session.persist(rudUserAddress);
         session.flush();
@@ -42,10 +42,10 @@ class UserAddressIT extends IntegrationTestBase {
 
     @Test
     void createUserAddressTest() {
-        User createUser = HibernateTestUtil.createUserToInsert();
+        User createUser = HibernateITUtil.createUserToInsert();
         session.persist(createUser);
         session.detach(createUser);
-        UserAddress cUserAddress = HibernateTestUtil.createUserAddress();
+        UserAddress cUserAddress = HibernateITUtil.createUserAddress();
         createUser.addUserAddress(cUserAddress);
 
         userRepository.save(createUser);

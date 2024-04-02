@@ -2,7 +2,7 @@ package com.itdev;
 
 import com.itdev.database.dao.repositories.AuthorRepository;
 import com.itdev.database.entity.Author;
-import com.itdev.util.HibernateTestUtil;
+import com.itdev.util.HibernateITUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +28,14 @@ class AuthorIT extends IntegrationTestBase {
 
     @BeforeEach
     void prepareAuthorTable() {
-        rudAuthor = HibernateTestUtil.createAuthorToReadUpdateDelete();
+        rudAuthor = HibernateITUtil.createAuthorToReadUpdateDelete();
         session.persist(rudAuthor);
         session.flush();
     }
 
     @Test
     void createAuthorTest() {
-        Author cAuthor = HibernateTestUtil.createAuthorToInsert();
+        Author cAuthor = HibernateITUtil.createAuthorToInsert();
 
         repository.save(cAuthor);
 

@@ -7,7 +7,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Builder
 @FieldNameConstants
 public record BookFilter(
         String name,
@@ -30,5 +29,8 @@ public record BookFilter(
 
         @DateTimeFormat(pattern = dateFormat)
         LocalDate maxBirthday) {
+
+        @Builder public BookFilter {}
+
         public static final String dateFormat = "yyyy-MM-dd";
 }

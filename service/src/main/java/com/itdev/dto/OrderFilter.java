@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Builder
 @FieldNameConstants
 public record OrderFilter(
         Long id,
@@ -54,5 +53,8 @@ public record OrderFilter(
 
         @DateTimeFormat(pattern = dateFormat)
         LocalDate maxBirthday) {
+
+        @Builder public OrderFilter {}
+
         public static final String dateFormat = "yyyy-MM-dd";
 }

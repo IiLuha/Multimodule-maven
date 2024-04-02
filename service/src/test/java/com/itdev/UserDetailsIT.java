@@ -3,7 +3,7 @@ package com.itdev;
 import com.itdev.database.dao.repositories.UserDetailsRepository;
 import com.itdev.database.entity.User;
 import com.itdev.database.entity.UserDetails;
-import com.itdev.util.HibernateTestUtil;
+import com.itdev.util.HibernateITUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +30,9 @@ class UserDetailsIT extends IntegrationTestBase {
 
     @BeforeEach
     void prepareUserDetailsTable() {
-        user = HibernateTestUtil.createUserToReadUpdateDelete();
+        user = HibernateITUtil.createUserToReadUpdateDelete();
         session.persist(user);
-        rudUserDetails = HibernateTestUtil.createUserDetails();
+        rudUserDetails = HibernateITUtil.createUserDetails();
         user.addUserDetails(rudUserDetails);
         session.persist(rudUserDetails);
         session.flush();
@@ -40,9 +40,9 @@ class UserDetailsIT extends IntegrationTestBase {
 
     @Test
     void createUserDetailsTest() {
-        User createUser = HibernateTestUtil.createUserToInsert();
+        User createUser = HibernateITUtil.createUserToInsert();
         session.persist(createUser);
-        UserDetails cUserDetails = HibernateTestUtil.createUserDetails();
+        UserDetails cUserDetails = HibernateITUtil.createUserDetails();
         createUser.addUserDetails(cUserDetails);
 
         repository.save(cUserDetails);

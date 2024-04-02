@@ -8,7 +8,7 @@ import com.itdev.database.entity.Book;
 import com.itdev.database.entity.Order;
 import com.itdev.database.entity.OrderProduct;
 import com.itdev.database.entity.User;
-import com.itdev.util.HibernateTestUtil;
+import com.itdev.util.HibernateITUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +39,12 @@ class OrderProductIT extends IntegrationTestBase {
 
     @BeforeEach
     void prepareOrderProductTable() {
-        User user = HibernateTestUtil.createUserToReadUpdateDelete();
-        order = HibernateTestUtil.createOrder();
+        User user = HibernateITUtil.createUserToReadUpdateDelete();
+        order = HibernateITUtil.createOrder();
         user.addOrder(order);
-        Author author = HibernateTestUtil.createAuthorToReadUpdateDelete();
-        book = HibernateTestUtil.createBook(author);
-        orderProduct = HibernateTestUtil.createOrderProduct();
+        Author author = HibernateITUtil.createAuthorToReadUpdateDelete();
+        book = HibernateITUtil.createBook(author);
+        orderProduct = HibernateITUtil.createOrderProduct();
         order.addOrderProduct(orderProduct);
         book.addOrderProduct(orderProduct);
         session.persist(user);
@@ -57,7 +57,7 @@ class OrderProductIT extends IntegrationTestBase {
 
     @Test
     void createOrderProductTest() {
-        OrderProduct orderProduct = HibernateTestUtil.createOrderProduct();
+        OrderProduct orderProduct = HibernateITUtil.createOrderProduct();
         order.addOrderProduct(orderProduct);
         book.addOrderProduct(orderProduct);
 
