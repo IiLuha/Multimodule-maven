@@ -4,7 +4,7 @@ import com.itdev.database.dao.repositories.AuthorRepository;
 import com.itdev.database.dao.repositories.BookRepository;
 import com.itdev.database.entity.Author;
 import com.itdev.database.entity.Book;
-import com.itdev.util.HibernateTestUtil;
+import com.itdev.util.HibernateITUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +32,8 @@ class BookIT extends IntegrationTestBase {
 
     @BeforeEach
     void prepareBookTable(){
-        Author author = HibernateTestUtil.createAuthorToReadUpdateDelete();
-        book = HibernateTestUtil.createRudBook(author);
+        Author author = HibernateITUtil.createAuthorToReadUpdateDelete();
+        book = HibernateITUtil.createRudBook(author);
         session.persist(author);
         session.persist(book);
         session.flush();
@@ -41,8 +41,8 @@ class BookIT extends IntegrationTestBase {
 
     @Test
     void createBookTest() {
-        Author author = HibernateTestUtil.createAuthorToInsert();
-        Book book = HibernateTestUtil.createBook(author);
+        Author author = HibernateITUtil.createAuthorToInsert();
+        Book book = HibernateITUtil.createBook(author);
 
         session.persist(author);
         repository.save(book);

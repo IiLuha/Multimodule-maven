@@ -2,7 +2,7 @@ package com.itdev;
 
 import com.itdev.database.dao.repositories.UserRepository;
 import com.itdev.database.entity.User;
-import com.itdev.util.HibernateTestUtil;
+import com.itdev.util.HibernateITUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +28,15 @@ class UserIT extends IntegrationTestBase {
 
     @BeforeEach
     void prepareUserTable() {
-        rudUser = HibernateTestUtil.createUserToReadUpdateDelete();
+        rudUser = HibernateITUtil.createUserToReadUpdateDelete();
         session.persist(rudUser);
         session.flush();
-        rudUser.addUserDetails(HibernateTestUtil.createUserDetails("Ivan", "Ivanov"));
+        rudUser.addUserDetails(HibernateITUtil.createUserDetails("Ivan", "Ivanov"));
     }
 
     @Test
     void createUserTest() {
-        User cUser = HibernateTestUtil.createUserToInsert();
+        User cUser = HibernateITUtil.createUserToInsert();
 
         repository.save(cUser);
 

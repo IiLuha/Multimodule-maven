@@ -22,7 +22,7 @@ import java.time.Period;
 import java.util.List;
 
 @UtilityClass
-public class HibernateTestUtil {
+public class HibernateITUtil {
 
     private static final PostgreSQLContainer<?> container = new PostgreSQLContainer<>("postgres:14");
 

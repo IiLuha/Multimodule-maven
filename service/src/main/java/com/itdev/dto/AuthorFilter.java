@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-@Builder
 @FieldNameConstants
 public record AuthorFilter(
         String firstname,
@@ -21,4 +20,6 @@ public record AuthorFilter(
 
         @DateTimeFormat(pattern = "yyyy-MM-dd")
         LocalDate maxBirthday) {
+
+        @Builder public AuthorFilter {}
 }

@@ -5,7 +5,7 @@ import com.itdev.database.dao.repositories.UserRepository;
 import com.itdev.database.entity.Order;
 import com.itdev.database.entity.User;
 import com.itdev.database.entity.fields.Status;
-import com.itdev.util.HibernateTestUtil;
+import com.itdev.util.HibernateITUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +36,8 @@ class OrderIT extends IntegrationTestBase {
 
     @BeforeEach
     void prepareOrderTable() {
-        user = HibernateTestUtil.createUserToReadUpdateDelete();
-        rudOrder = HibernateTestUtil.createOrder();
+        user = HibernateITUtil.createUserToReadUpdateDelete();
+        rudOrder = HibernateITUtil.createOrder();
         user.addOrder(rudOrder);
         session.persist(user);
 //        session.persist(rudOrder);
@@ -46,7 +46,7 @@ class OrderIT extends IntegrationTestBase {
 
     @Test
     void createOrderTest() {
-        Order order = HibernateTestUtil.createToSaveOrder();
+        Order order = HibernateITUtil.createToSaveOrder();
         user.addOrder(order);
 
         repository.save(order);
@@ -102,7 +102,7 @@ class OrderIT extends IntegrationTestBase {
 
     @Test
     void deleteOrdersMadeEarlierDateTest() {
-        Order order = HibernateTestUtil.createOrder(500);
+        Order order = HibernateITUtil.createOrder(500);
         user.addOrder(order);
 
         repository.deleteAllByCreatedAtBefore(LocalDateTime.now().minus(Period.ofYears(2)));
