@@ -294,7 +294,7 @@ class UserControllerTest {
     }
 
     @Test
-    void updateDoesReturnStringOfRedirectToPageRegistrationIfBindingResultHasErrors() {
+    void updateDoesReturnStringOfRedirectToPageUserIfBindingResultHasErrors() {
         //given
         Integer id = 1;
         UserCreateEditDto cUser = UnitTestUtil.getCreateUser(null, null);
@@ -314,7 +314,7 @@ class UserControllerTest {
         verify(bindingResult).getAllErrors();
         verify(redirectAttributes).addFlashAttribute("user", cUser);
         verify(redirectAttributes).addFlashAttribute("errors", allErrors);
-        assertEquals("redirect:/users/{id}/update", actual);
+        assertEquals("redirect:/users/{id}", actual);
     }
 
     @Test

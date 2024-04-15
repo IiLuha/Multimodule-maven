@@ -68,12 +68,13 @@ public class UserController {
     }
 
     @PostMapping("/{id}/update")
-    public String update(@PathVariable("id") Integer id, @Validated UserCreateEditDto user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String update(@PathVariable("id") Integer id, @Validated UserCreateEditDto user,
+                         BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         Optional<UserReadDto> update = userService.update(id, user);
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("user", user);
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            return "redirect:/users/registration";
+            return "redirect:/users/{id}";
         }
         return update
                 .map(it -> "redirect:/users/{id}")

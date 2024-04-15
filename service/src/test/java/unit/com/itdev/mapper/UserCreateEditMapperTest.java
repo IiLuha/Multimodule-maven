@@ -83,6 +83,6 @@ class UserCreateEditMapperTest {
         //when
 
         //then
-        assertThrows(NullPointerException.class, () -> mapper.map(createUser));
+        assertThrows(NullPointerException.class, () -> mapper.map(createUser , empty));
     }
 }
